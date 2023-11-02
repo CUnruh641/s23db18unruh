@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  -
+    image_names = ['/images/salt_shaker.jpg', '/images/pepper_shaker.jpg',
+      '/images/parmesan_shaker.jpg', '/images/oregano_shaker.jpg', '/images/onion_shaker.jpg'];
+
+  - for(let i = 0; i < 3; i++){
+      - randNum = Math.floor(Math.random()*5);
+      img(src=(image_names[randNum]) alt="A picture of some spice shaker", style="height:300px; width:300px;")
+
+  - }

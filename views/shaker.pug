@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  div Shaker
+  - 
+    results = [{shaker_type: 'Type: Salt', shaker_size: 'Size: Small', shaker_cost: ('Cost: $' + 5 + '.00')},
+    {shaker_type: 'Type: Pepper', shaker_size: 'Size: Moderate', shaker_cost: ('Cost: $' + 7.5 + '0')},
+    {shaker_type: 'Type: Parmesan', shaker_size: 'Size: Large', shaker_cost: ('Cost: $' + 10 + '.00')}];
+  
+  div(class="container-fluid")
+    div(class="row")
+    each item in results
+      div(class="col-sm") #{item["shaker_type"]}
+        br
+        | #{item["shaker_size"]}
+        br
+        | #{item["shaker_cost"]}
+      br

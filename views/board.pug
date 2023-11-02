@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  h1= title
+  p Rows: #{query.rows}, Columns: #{query.cols}
+  - rows = Number(query.rows)
+  - cols = Number(query.cols)
+  if !Number.isInteger(rows)
+    p Rows is not an Integer
+  else if rows > 10 || rows < 1
+    p Rows is less than 1 or greater than 10
+  else if !Number.isInteger(cols)
+    p Cols is not an Integer
+  else if cols > 10 || cols < 1
+    p Cols is less than 1 or greater than 10
+  else
+    table#outer
+      - for(let i = 0; i < rows; i++){
+        tr#middle
+          - for(let j = 0; j < cols; j++){
+              if i == j
+                td(style="background-color:yellow")= '1'
+              else if i == j - 1
+                td(style="background-color:greenyellow")= i
+              else if i - 1 == j
+                td(style="background-color:aqua")= '2'
+              else
+                td= '0'
+          - }
+      - }

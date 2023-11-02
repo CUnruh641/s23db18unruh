@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p This is the server's front page
+  button(type="button", class="btn btn-secondary" onclick="goFaster()") Press Me
+  div(id="faster") Increase the Speed
+  script. 
+    let= mph = 20;
+    let= change = 1;   
+    function goFaster () {
+        mph = mph + change;
+        change = change + 1;
+        console.log(mph);
+        console.log(change);
+        document.getElementById("faster").innerHTML = "MPH " + mph + " change is " + change;
+    }
+  a(href="http://localhost:3000/shaker") To the page about Shakers
