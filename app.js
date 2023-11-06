@@ -3,12 +3,42 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var Shaker = require("./models/shaker");
+var mongoose = require('mongoose');
+
+require('dotenv').config();
+const connectionString = process.env.MONGO_CON;
+mongoose.connect(connectionString);
+
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
+db.once("open", function(){console.log("Connection to DB succeeded")});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var shakerRouter = require('./routes/shaker');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
+
+// We can seed the collection if needed on server start
+async function recreateDB(){
+  // Delete everything
+  await Shaker.deleteMany();
+  
+  let instance1 = new Shaker({shaker_type: 'Salt', shaker_size: 'Small', shaker_cost: 5});
+  let instance2 = new Shaker({shaker_type: 'Pepper', shaker_size: 'Moderate', shaker_cost: 7.5});
+  let instance3 = new Shaker({shaker_type: 'Parmesan', shaker_size: 'Large', shaker_cost: 10});
+  
+  instance1.save().then(doc => {console.log("First Object Saved")}).catch(err => {console.error(err)});
+  instance2.save().then(doc => {console.log("Second Object Saved")}).catch(err => {console.error(err)});
+  instance3.save().then(doc => {console.log("Third Object Saved")}).catch(err => {console.error(err)});
+}
+let reseed = true;
+if (reseed) {
+  recreateDB();
+}
 
 var app = express();
 
