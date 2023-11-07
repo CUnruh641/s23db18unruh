@@ -1,8 +1,15 @@
 var Shaker = require('../models/shaker');
 
 // List of all Costumes
-exports.shaker_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Shaker List');
+exports.shaker_list = async function(req, res) {
+    try{
+        theShakers = await Shaker.find();
+        res.send(theShakers);
+    }
+    catch(err){
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
 }
 
 // for a specific Costume.
