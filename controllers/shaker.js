@@ -1,0 +1,26 @@
+var Shaker = require('../models/shaker');
+
+// List of all Costumes
+exports.shaker_list = function(req, res) {
+    res.send('NOT IMPLEMENTED: Shaker List');
+}
+
+// for a specific Costume.
+exports.shaker_detail = function(req, res) {
+    res.send('NOT IMPLEMENTED: Shaker Detail: ' + req.params.id);
+}
+
+// Handle Costume create on POST.
+exports.shaker_create_post = function(req, res) {
+    res.send('NOT IMPLEMENTED: Shaker Create POST');
+}
+
+// Handle Costume delete form on DELETE.
+exports.shaker_delete = function(req, res) {
+    res.send('NOT IMPLEMENTED: Shaker Delete DELETE ' + req.params.id);
+}
+
+// Handle Costume update form on PUT.
+exports.shaker_update_put = function(req, res) {
+    res.send('NOT IMPLEMENTED: Shaker Update PUT' + req.params.id);
+}
