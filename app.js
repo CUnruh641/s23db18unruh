@@ -21,6 +21,7 @@ var usersRouter = require('./routes/users');
 var shakerRouter = require('./routes/shaker');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
+var resourceRouter = require('./routes/resource');
 
 // We can seed the collection if needed on server start
 async function recreateDB(){
@@ -57,6 +58,7 @@ app.use('/users', usersRouter);
 app.use('/shaker', shakerRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
+app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
