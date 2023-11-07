@@ -1,9 +1,7 @@
 var express = require('express');
+const shaker_controller = require('../controllers/shakers');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('shaker', { title: 'Search Results Shaker' });
-});
-
+/* GET shakers*/
+router.get('/', shaker_controller.shaker_view_all_Page);
 module.exports = router;

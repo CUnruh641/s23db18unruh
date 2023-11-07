@@ -31,3 +31,16 @@ exports.shaker_delete = function(req, res) {
 exports.shaker_update_put = function(req, res) {
     res.send('NOT IMPLEMENTED: Shaker Update PUT' + req.params.id);
 }
+
+// VIEWS
+// Handle a show all view
+exports.shaker_view_all_Page = async function(req, res) {
+    try{
+        theShakers = await Shaker.find();
+        res.render('shaker', { title: 'Shaker Search Results', results: theShakers });
+    }
+    catch(err){
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
+}
