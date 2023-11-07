@@ -3,7 +3,7 @@ var router = express.Router();
 
 // Require controller modules.
 var api_controller = require('../controllers/api');
-var shaker_controller = require('../controllers/shaker');
+var shaker_controller = require('../controllers/shakers');
 
 /// API ROUTE ///
 // GET resources base.

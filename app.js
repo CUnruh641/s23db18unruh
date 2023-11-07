@@ -58,7 +58,7 @@ app.use('/users', usersRouter);
 app.use('/shaker', shakerRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
-app.use('.resource', resourceRouter);
+app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
