@@ -12,9 +12,16 @@ exports.shaker_list = async function(req, res) {
     }
 }
 
-//List for a Specific Shaker.
-exports.shaker_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Shaker Detail: ' + req.params.id);
+//For a Specific Shaker.
+exports.shaker_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        result = await  Shaker.findById( req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+    }
 }
 
 // Handle Shaker Create on POST.
