@@ -42,7 +42,7 @@ exports.shaker_create_post = async function(req, res) {
         res.status(500);
         res.send(`{"error": ${err}}`);
     }
-};
+}
 
 // Handle Shaker Delete Form on DELETE.
 exports.shaker_delete = function(req, res) {
@@ -50,8 +50,22 @@ exports.shaker_delete = function(req, res) {
 }
 
 // Handle Shaker Update Form on PUT.
-exports.shaker_update_put = function(req, res) {
-    res.send('NOT IMPLEMENTED: Shaker Update PUT' + req.params.id);
+exports.shaker_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await Shaker.findById( req.params.id)
+        // Do updates of properties
+        if(req.body.shaker_type)
+        toUpdate.shaker_type = req.body.shaker_type;
+        if(req.body.shaker_size) toUpdate.shaker_size = req.body.shaker_size;
+        if(req.body.shaker_cost) toUpdate.shaker_cost = req.body.shaker_cost;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id} failed`);
+    }
 }
 
 // VIEWS
