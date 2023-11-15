@@ -45,9 +45,18 @@ exports.shaker_create_post = async function(req, res) {
 }
 
 // Handle Shaker Delete Form on DELETE.
-exports.shaker_delete = function(req, res) {
-    res.send('NOT IMPLEMENTED: Shaker Delete DELETE ' + req.params.id);
+exports.shaker_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        result = await Shaker.findByIdAndDelete( req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
 }
+    
 
 // Handle Shaker Update Form on PUT.
 exports.shaker_update_put = async function(req, res) {
