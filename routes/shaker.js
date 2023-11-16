@@ -5,10 +5,13 @@ var router = express.Router();
 /* GET shakers*/
 router.get('/', shaker_controller.shaker_view_all_Page);
 
-/* GET detail costume page */
+/* GET detail shaker page */
 router.get('/detail', shaker_controller.shaker_view_one_Page);
 
-/* GET create costume page */
-router.get('/create', costume_controlers.costume_create_Page);
+/* GET create shaker page */
+router.get('/create', shaker_controller.shaker_create_Page);
+
+/* GET create update page */
+router.get('/update', shaker_controller.shaker_update_Page);
 
 module.exports = router;

@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1= title
+  form(id='ShakerForm', action="/resource/shakers", method="POST")
+  div.form-group
+    label.shakerAttr(for='shaker_type') Shaker Type:
+    input#shaker_type(type='text', name='shaker_type')
+  div.form-group
+    label.shakerAttr(for='shaker_size') Shaker Size:
+    input#shaker_size(type='text', name='shaker_size')
+  div.form-group
+    label.shakerAttr(for='shaker_cost') Shaker Cost:
+    input#shaker_cost(type='number', name='shaker_cost')
+    input(type="submit")
+  script.
+    document.forms['ShakerForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+        fetch(event.target.action, {
+          method: 'POST', body: new URLSearchParams(new FormData(event.target))
+        }).then((resp) => {
+          return resp.json();
+        }).then((body) => {
+          alert("Save succeded")
+        }).catch((error) => {
+          alert("Save failed " + error)
+        });
+    });
