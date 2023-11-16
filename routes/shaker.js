@@ -14,4 +14,7 @@ router.get('/create', shaker_controller.shaker_create_Page);
 /* GET create update page */
 router.get('/update', shaker_controller.shaker_update_Page);
 
+/* GET delete costume page */
+router.get('/delete', shaker_controller.shaker_delete_Page);
+
 module.exports = router;
