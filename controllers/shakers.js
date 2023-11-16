@@ -122,11 +122,11 @@ exports.shaker_create_Page = function(req, res) {
 exports.shaker_update_Page = async function(req, res) {
     console.log("update view for item "+req.query.id)
     try{
-    let result = await Shaker.findById(req.query.id)
-    res.render('shakerupdate', { title: 'Shaker Update', toShow: result });
+        let result = await Shaker.findById(req.query.id)
+        res.render('shakerupdate', { title: 'Shaker Update', toShow: result });
     }
     catch(err){
-    res.status(500)
-    res.send(`{'error': '${err}'}`);
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
     }
-    }
+}

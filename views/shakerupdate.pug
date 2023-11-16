@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  h1= title
+  - let shakerid = toShow._id
+  - let shaker_type = toShow.shaker_type
+  - let shaker_size = toShow.shaker_size
+  - let shaker_cost = toShow.shaker_cost
+  div.row
+    div(class='shakerAttr col-sm') Shaker ID is: #{shakerid}
+  form(id='ShakerForm', action="/resource/shakers", method="PUT")
+  div.row
+    div.form-group
+      label.shakerAttr(for='shaker_type') Shaker Type:
+      input#shaker_type(type='text', name='shaker_type' value= shaker_type)
+  div.row
+    div.form-group
+      label.shakerAttr(for='shaker_size') Shaker Size:
+      input#shaker_size(type='text', name='shaker_size' value= shaker_size)
+  div.row
+    div.form-group
+      label.shakerAttr(for='shaker_cost') Shaker Cost:
+      input#shaker_cost(type='number', name='shaker_cost' value= shaker_cost)
+      input(type="submit")
+  script.
+    document.forms['ShakerForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+        fetch(event.target.action, {
+          method: 'PUT', body: new URLSearchParams(new FormData(event.target))
+        }).then((resp) => {
+          return resp.json();
+        }).then((body) => {
+          alert("Save succeded")
+        }).catch((error) => {
+          alert("Save failed " + error)
+        });
+    });
