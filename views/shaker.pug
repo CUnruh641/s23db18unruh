@@ -2,6 +2,10 @@ extends layout
 
 block content
   h1= title
+  - let createOne = `dispatch(\'/shaker/create\')`
+  button.btn(class='btn-primary ml-1', onclick= createOne) Create
+  br
+  br
   div Shaker
   
   - let items = results
@@ -9,9 +13,14 @@ block content
   div(class="container-fluid")
     div(class="row")
     each item in results
-      - let destination = `dispatch(\'/shaker/update?id=${item._id}\')`
-      div(class="col-sm") Item #{item["shaker_type"]}(#{item["shaker_size"]}) is #{item["shaker_cost"]}
-        button.btn(class='btn-primary ml-1', onclick= destination) Update
+      - let updateOne = `dispatch(\'/shaker/update?id=${item._id}\')`
+      - let detailOne = `dispatch(\'/shaker/detail?id=${item._id}\')`
+      - let deleteOne = `dispatch(\'/shaker/delete?id=${item._id}\')`
+      div(class="col-sm") Item #{item["shaker_type"]}(#{item["shaker_size"]}) is #{item["shaker_cost"]}#{' '}
+        div(class='btn-group')
+          button.btn(class='btn-primary ml-1 btn-group', onclick= updateOne) Update
+          button.btn(class='btn-primary ml-1 btn-group', onclick= detailOne) Detail
+          button.btn(class='btn-primary ml-1 btn-group', onclick= deleteOne) Delete
   script.
     function dispatch(path){
       window.location.href=path
