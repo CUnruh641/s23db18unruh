@@ -7,6 +7,7 @@ var Shaker = require("./models/shaker");
 var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var Account = require('./models/account');
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -86,16 +87,9 @@ app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
 app.use('/resource', resourceRouter);
 
-const Schema = mongoose.Schema;
-const passportLocalMongoose = require("passport-local-mongoose");
-const accountSchema = new Schema({
-    username: String,
-    password: String
-});
-accountSchema.plugin(passportLocalMongoose);
-// We export the Schema to avoid attaching the model to the
-// default mongoose connection.
-module.exports = mongoose.model("Account", accountSchema);
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
